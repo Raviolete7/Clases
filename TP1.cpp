@@ -36,37 +36,49 @@ ocupacion = 0;
 
 
 }
+
+
 float botella::getcapacidad(){
 return capacidad;
 }
+
 void botella::llenar(float aumentar){
+if(tapada==false){
 if(ocupacion+aumentar <= capacidad){
     ocupacion += aumentar;
 }
 else{ocupacion = capacidad;}
 
-}
+}}
+
 float botella::getocupacion(){
 return ocupacion;
 }
+
 void botella::vaciar(float disminuir){
+if(tapada==false){
 if(ocupacion-disminuir >= 0){
     ocupacion -= disminuir;
 }
 else{ocupacion = 0;}
 
-}
+}}
+
 void botella::vaciar(){
+if(tapada==false){
 ocupacion = 0;
 
-}
+}}
 
 void botella::destapar(){
+    if(tapada==true){
     tapada = false;
-}
+}}
+
 bool botella::gettapada(){
 return tapada;
 }
+
 float botella::getdisponibilidad(){
 float disponibilidad = capacidad - ocupacion;
 return disponibilidad;
@@ -74,9 +86,12 @@ return disponibilidad;
 }
 
 void botella::llenar(){
+if(tapada==false){
 ocupacion = capacidad;
-}
+}}
+
 int main(){
+
 float capacidad = 600, ocupacion = 200;
 
 botella reg(500);
