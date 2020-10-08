@@ -13,20 +13,28 @@ bool tapada;
 
 public:
 botella(float );
-botella(float , bool , float );
+botella();
 float getcapacidad();
 void llenar(float aumentar);
 float getocupacion();
 void vaciar(float disminuir);
+void vaciar();
+void destapar();
+bool gettapada();
+float getdisponibilidad();
+void llenar();
 };
 
 botella::botella(float capacidad_total){
 capacidad = capacidad_total;
+ocupacion = 0;
 }
-botella::botella(float capacidad_total, bool tapa, float ocu){
-capacidad = capacidad_total;
-tapada = tapa;
-ocupacion = ocu;
+
+botella::botella(){
+capacidad = 100;
+ocupacion = 0;
+
+
 }
 float botella::getcapacidad(){
 return capacidad;
@@ -48,18 +56,43 @@ if(ocupacion-disminuir >= 0){
 else{ocupacion = 0;}
 
 }
+void botella::vaciar(){
+ocupacion = 0;
 
+}
 
+void botella::destapar(){
+    tapada = false;
+}
+bool botella::gettapada(){
+return tapada;
+}
+float botella::getdisponibilidad(){
+float disponibilidad = capacidad - ocupacion;
+return disponibilidad;
+
+}
+
+void botella::llenar(){
+ocupacion = capacidad;
+}
 int main(){
 float capacidad = 600, ocupacion = 200;
-botella reg(capacidad, true, ocupacion);
+
+botella reg(500);
+reg.llenar();
 cout<<"Capacidad: "<< reg.getcapacidad();
 cout<<"Ocupacion: "<< reg.getocupacion();
+cout<<"Disponibilidad: "<< reg.getdisponibilidad();
 float cargar;
 cout<<endl<<endl<<"Ingrese cuanto quiere vaciar en la botella: ";
 cin>>cargar;
 reg.vaciar(cargar);
 cout<<endl<<endl<<endl<<"Ocupacion: "<< reg.getocupacion();
-
-
+reg.vaciar();
+cout<<endl<<endl<<endl<<"Ocupacion: "<< reg.getocupacion();
+cout<<"Estado de la botella: "<< reg.gettapada();
+reg.destapar();
+cout<<"Estado de la botella: "<< reg.gettapada();
+cout<<"Disponibilidad: "<< reg.getdisponibilidad();
 return 0;}
